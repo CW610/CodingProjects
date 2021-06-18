@@ -8,6 +8,6 @@ public interface EmployeeService {
 	public void updateEmployee();
 	public void deleteEmployee();
 	public void addEmployee();
-	public void Change();
+	public void Change(int empNo);
 }
 

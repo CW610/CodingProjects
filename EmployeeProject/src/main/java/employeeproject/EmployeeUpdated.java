@@ -1,12 +1,12 @@
 package employeeproject;
 
-public class Employee {
+public class EmployeeUpdated {
 private	int empNo;
 private	String empName;
 private	double salary;
 private	Address address;
 	
-	public Employee(int empNo, String empName, double salary, Address address) {
+	public EmployeeUpdated(int empNo, String empName, double salary, Address address) {
 		
 		this.empNo=empNo;
 		this.empName=empName;

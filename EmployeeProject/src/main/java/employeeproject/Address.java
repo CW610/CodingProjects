@@ -6,8 +6,7 @@ public class Address {
 
 	
 	public Address(String city, String state) {
-		//city=this.getCity();
-		//state=this.getState();
+		
 		this.city=city;
 		this.state=state;
 	}

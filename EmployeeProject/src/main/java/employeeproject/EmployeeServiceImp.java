@@ -1,36 +1,47 @@
 package employeeproject;
 import java.util.Scanner;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import jdk.jfr.internal.Logger;
 import sun.util.logging.PlatformLogger.Level;
 
-public class EmployeeServiceImp implements EmployeeService {
+
+
+public  class EmployeeServiceImp implements EmployeeService {
 	Scanner scan = new Scanner(System.in);
 	//creating a new List of employees already in our system
-	private static List<Employee> empList = new ArrayList<Employee>() {
+	private static  ArrayList<Employee> empList = new ArrayList<Employee>() {
 		
-			private static final long serialVersionUID = 1L;
+			
+		
+		 static final long serialVersionUID = 1L;
 			{
-				
+				//empList.
 			add(new Employee(1, "Jenna", 1750, new Address("Austin", "Texas")));
 			add(new Employee(2, "Larry", 1600, new Address("Chicago", "Illinois")));
 			add(new Employee(3, "Amy", 1350, new Address("Nashville", "Tennassee")));
 			add(new Employee(4, "Judy", 1200, new Address("Birminham", "Alabama")));
+			add(new Employee(5, "Michael", 1700, new Address("Albany", "New York")));
+			add(new Employee(6, "Chloe", 1620, new Address("Savannah", "Georgia")));
+			add(new Employee(7, "Daniel", 1300, new Address("Richmond", "Virginia")));
+			add(new Employee(8, "Tina", 1250, new Address("Charleston", "South Carolina")));
 			}
-		
-	};
+		};
 	
 	public void displayAllEmployees() {
 		
 		// using stream saves some typing
-		empList.stream().forEach(System.out::println);
-		
+		// refactored in a lambda
+		empList.stream().forEach((employ) -> {System.out.println(employ); });
 		
 	}
 
+	// Using a monthly salary times 
 	public double calculateYearlySalary(Employee e1) {
 		double YearlySalary = e1.getSalary()*12;
 		return YearlySalary;
@@ -52,30 +63,18 @@ public class EmployeeServiceImp implements EmployeeService {
 
 	public void updateEmployee() 
 	{
-		for(Employee e1:empList) {
-			System.out.println("Type the Employee Number of who you wish to change");
-			int choi=scan.nextInt();
-			switch(choi) {
-			case 1:
-				Change();
-				break;
-			case 2:
-				Change();
-				break;
-			case 3:
-				Change();
-				break;
-			case 4:
-				Change();
-				break;
-			default:
-				System.out.println("Employee not found:Try Again");
-				updateEmployee();
-			}
-			
-		}
 		
-}
+			
+			System.out.println("Type the Employee Number of who you wish to change");
+			
+			int choi=scan.nextInt();
+			
+			Change(choi);
+			
+		
+	}
+	
+	
 public void deleteEmployee() 
 	{
 		System.out.println("Please enter Employee ID of Employee you wish to delete");
@@ -110,9 +109,7 @@ public void deleteEmployee()
 		
 	}
 
-	public void Change() {
-		for(Employee e1:empList) {
-			
+	public void Change(int empNo) {
 		
 		System.out.println("Please enter what you would like to change");
 		System.out.println("1. Employee Name");
@@ -122,28 +119,33 @@ public void deleteEmployee()
 		
 		switch(cha) {
 		case 1:
-			//scan.nextLine();
+			
 			System.out.println("Enter your name change");
 			String name = scan.next();
-			e1.setEmpName(name);
-			System.out.println("New Employee Name " + e1.getEmpName());
+			findByEmployeeNo(empNo).setEmpName(name);
+			System.out.println("New Employee Name " + findByEmployeeNo(empNo).getEmpName());
 			System.out.println(empList);
 			break;
 		case 2:
 			double salary=scan.nextDouble();
-			e1.setSalary(salary);
-			System.out.println("New Employee Salary " +e1.getSalary());
+			findByEmployeeNo(empNo).setSalary(salary);
+			System.out.println("New Employee Salary " + findByEmployeeNo(empNo).getSalary());
+			System.out.println(empList);
+			break;
 		case 3:
 			System.out.println("Enter a City for new address");
 			String city= scan.next();
 			System.out.println("Enter a State for new address");
 			String state= scan.next();
-			e1.setAddress(new Address(city,state));
-			System.out.println("The employee's Address is now set to: " + e1.getAddress().getCity() +", " + e1.getAddress().getState());
+			
+			findByEmployeeNo(empNo).setAddress(new Address(city,state));
+			System.out.println("The employee's Address is now set to: " + findByEmployeeNo(empNo).getAddress().getCity() + ", " + findByEmployeeNo(empNo).getAddress().getState());
+			
+			System.out.println(empList);
 			break;
 			default:
 				System.out.println("Command not recognized");
 		}
-	}
+	
 }
 }
